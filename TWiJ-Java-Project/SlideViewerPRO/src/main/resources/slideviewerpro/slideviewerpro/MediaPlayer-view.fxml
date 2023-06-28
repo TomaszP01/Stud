@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+
+<BorderPane minHeight="1.0" prefHeight="780.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slideviewerpro.slideviewerpro.MediaPlayerController">
+    <center>
+        <MediaView fx:id="mediaView" nodeOrientation="INHERIT" BorderPane.alignment="TOP_CENTER">
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+            <rotationAxis>
+                <Point3D />
+            </rotationAxis></MediaView>
+    </center>
+    <top>
+        <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="menuOpen" mnemonicParsing="false" onAction="#handleChooseFile" text="Select File" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <bottom>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" spacing="10.0">
+                    <children>
+                        <Button fx:id="pauseButton" alignment="CENTER" mnemonicParsing="false" onAction="#handlePauseMedia" text="PAUSE" textAlignment="CENTER" />
+                        <Button fx:id="playButton" mnemonicParsing="false" onAction="#handlePlayMedia" text="PLAY" />
+                        <Button fx:id="resetButton" mnemonicParsing="false" onAction="#handleResetMedia" text="RESET" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </bottom>
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+</BorderPane>

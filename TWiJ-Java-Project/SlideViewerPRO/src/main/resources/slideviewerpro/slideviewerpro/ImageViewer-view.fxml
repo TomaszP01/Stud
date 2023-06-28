@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane minHeight="1.0" prefHeight="780.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slideviewerpro.slideviewerpro.ImageViewerController">
+
+    <center>
+        <!-- Kontener StackPane z ograniczeniem rozmiaru -->
+        <StackPane fx:id="imageContainer" BorderPane.alignment="CENTER" />
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" spacing="10">
+            <Button fx:id="handlePreviousButton" maxWidth="70.0" minWidth="70.0" onAction="#handlePreviousButton" prefWidth="70.0" text="&lt;&lt;" />
+            <Button fx:id="handleNextButton" maxWidth="70.0" minWidth="70.0" onAction="#handleNextButton" prefWidth="70.0" text="&gt;&gt;" />
+        </HBox>
+    </bottom>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="handleSelectFolderButton" mnemonicParsing="false" onAction="#handleSelectFolderButton" text="Select Folder" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+
+</BorderPane>

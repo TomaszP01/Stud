@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slideviewerpro.slideviewerpro.MainController">
+  <children>
+    <Button fx:id="watchButton" layoutX="202.0" layoutY="188.0" mnemonicParsing="false" onAction="#WatchAction" text="Ogladaj wyklad" />
+    <Button fx:id="browseButtno" layoutX="300.0" layoutY="188.0" mnemonicParsing="false" onAction="#BrowseAction" text="Przegladaj wyklad" />
+  </children>
+</AnchorPane>
