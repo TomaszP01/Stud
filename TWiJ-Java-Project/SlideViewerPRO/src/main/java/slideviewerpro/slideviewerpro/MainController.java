@@ -4,12 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class MainController {
-
+    @FXML
+    private AnchorPane Pane;
     @FXML
     public void WatchAction(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
@@ -27,5 +30,9 @@ public class MainController {
         stage.setTitle("ImageViewer");
         stage.setScene(scene);
         stage.show();
+    }
+    public void handleCloseButton(ActionEvent actionEvent) {
+        Stage stage = (Stage) Pane.getScene().getWindow();
+        stage.close();
     }
 }

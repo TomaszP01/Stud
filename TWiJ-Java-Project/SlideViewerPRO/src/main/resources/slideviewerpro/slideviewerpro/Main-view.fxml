@@ -3,10 +3,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slideviewerpro.slideviewerpro.MainController">
+<AnchorPane fx:id="Pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="slideviewerpro.slideviewerpro.MainController">
   <children>
-    <Button fx:id="watchButton" layoutX="202.0" layoutY="188.0" mnemonicParsing="false" onAction="#WatchAction" text="Ogladaj wyklad" />
-    <Button fx:id="browseButtno" layoutX="300.0" layoutY="188.0" mnemonicParsing="false" onAction="#BrowseAction" text="Przegladaj wyklad" />
+    <Button fx:id="watchButton" layoutX="184.0" layoutY="188.0" maxWidth="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#WatchAction" prefWidth="110.0" text="Ogladaj wyklad" />
+    <Button fx:id="browseButtno" layoutX="308.0" layoutY="188.0" maxWidth="110.0" minWidth="110.0" mnemonicParsing="false" onAction="#BrowseAction" prefWidth="110.0" text="Przegladaj slajdy" />
+      <Label layoutX="247.0" layoutY="156.0" text="Co chciałbyś zrobić?" />
+      <MenuBar layoutY="2.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="CloseButton" mnemonicParsing="false" onAction="#handleCloseButton" text="Close" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
   </children>
 </AnchorPane>

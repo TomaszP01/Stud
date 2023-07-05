@@ -1,32 +1,46 @@
 package slideviewerpro.slideviewerpro;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.util.Duration;
+
 import static javafx.beans.binding.Bindings.selectDouble;
 
 public class ImageViewerController {
     @FXML
-    private Button selectFolderButton;
-    @FXML
     private StackPane imageContainer;
+    @FXML
+    private ComboBox<String> imageComboBox = new ComboBox<>();
     private List<File> imageFiles;
     private int currentImageIndex;
+    private Timeline slideshowTimer;
 
     public void initialize() {
         imageFiles = new ArrayList<>();
         currentImageIndex = 0;
+        slideshowTimer = new Timeline();
+        slideshowTimer.setCycleCount(Timeline.INDEFINITE);
     }
     @FXML
-    private void handleSelectFolderButton(ActionEvent event) {
+    private void handleSelectFolderButton(ActionEvent actionEvent) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File selectedFolder = directoryChooser.showDialog(null);
 
@@ -39,7 +53,35 @@ public class ImageViewerController {
         }
     }
     @FXML
-    private void handleNextButton(ActionEvent event) {
+    private void handleSetIntervalsButton(ActionEvent actionEvent){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Enter Number");
+        dialog.setHeaderText(null);
+        dialog.setContentText("Enter a number:");
+
+        Optional<String> result = dialog.showAndWait();
+
+        result.ifPresent(number -> {
+            try {
+                int parsedNumber = Integer.parseInt(number);
+                configureSlideshowTimer(parsedNumber);
+            } catch (NumberFormatException e){}
+        });
+    }
+    private void configureSlideshowTimer(int interval) {
+        slideshowTimer.stop();
+        slideshowTimer.getKeyFrames().clear();
+        slideshowTimer.getKeyFrames().add(new KeyFrame(Duration.seconds(interval), this::handleNextButton));
+    }
+    @FXML
+    private void handleFirstButton(ActionEvent actionEvent){
+        if (!imageFiles.isEmpty()) {
+            currentImageIndex = 0;
+            displayImage(imageFiles.get(currentImageIndex));
+        }
+    }
+    @FXML
+    private void handleNextButton(ActionEvent actionEvent) {
         if (!imageFiles.isEmpty()) {
             currentImageIndex = currentImageIndex + 1;
             if (currentImageIndex >= imageFiles.size()) {
@@ -49,13 +91,41 @@ public class ImageViewerController {
         }
     }
     @FXML
-    private void handlePreviousButton(ActionEvent event) {
+    private void handlePlayStopButton(ActionEvent actionEvent) {
+        if (!imageFiles.isEmpty()) {
+            if (slideshowTimer.getStatus() == Timeline.Status.RUNNING) {
+                slideshowTimer.stop();
+            } else {
+                slideshowTimer.play();
+            }
+        }
+    }
+    @FXML
+    private void handlePreviousButton(ActionEvent actionEvent) {
         if (!imageFiles.isEmpty()) {
             currentImageIndex = currentImageIndex - 1;
             if (currentImageIndex < 0) {
                 currentImageIndex = imageFiles.size() - 1;
             }
             displayImage(imageFiles.get(currentImageIndex));
+        }
+    }
+    @FXML
+    private void handleLastButton(ActionEvent actionEvent){
+        currentImageIndex = imageFiles.size() - 1;
+        displayImage(imageFiles.get(currentImageIndex));
+    }
+    @FXML
+    private void handleCloseButton(ActionEvent actionEvent){
+        Stage stage = (Stage) imageContainer.getScene().getWindow();
+        stage.close();
+    }
+    @FXML
+    private void handleComboBox(){
+        int selectedIndex = imageComboBox.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0 && selectedIndex < imageFiles.size()) {
+            File selectedFile = imageFiles.get(selectedIndex);
+            displayImage(selectedFile);
         }
     }
     private void findImageFiles(File folder) {
@@ -65,6 +135,7 @@ public class ImageViewerController {
             for (File file : files) {
                 if (file.isFile() && isImageFile(file)) {
                     imageFiles.add(file);
+                    imageComboBox.getItems().add(file.getName());
                 }
             }
         }

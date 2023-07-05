@@ -12,8 +12,11 @@
 
     <bottom>
         <HBox alignment="CENTER" spacing="10">
+         <Button fx:id="FirstButton" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" onAction="#handleFirstButton" prefWidth="70.0" text="First" />
             <Button fx:id="handlePreviousButton" maxWidth="70.0" minWidth="70.0" onAction="#handlePreviousButton" prefWidth="70.0" text="&lt;&lt;" />
+         <Button fx:id="PlayStopButton" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" onAction="#handlePlayStopButton" prefWidth="70.0" text="Play/Stop" />
             <Button fx:id="handleNextButton" maxWidth="70.0" minWidth="70.0" onAction="#handleNextButton" prefWidth="70.0" text="&gt;&gt;" />
+         <Button fx:id="LastButton" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" onAction="#handleLastButton" prefWidth="70.0" text="Last" />
         </HBox>
     </bottom>
    <top>
@@ -22,10 +25,15 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="handleSelectFolderButton" mnemonicParsing="false" onAction="#handleSelectFolderButton" text="Select Folder" />
+                <MenuItem fx:id="setIntervalsButton" mnemonicParsing="false" onAction="#handleSetIntervalsButton" text="Set Timer Intervals" />
+                <MenuItem fx:id="CloseButton" mnemonicParsing="false" onAction="#handleCloseButton" text="Close" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
    </top>
+   <right>
+      <ComboBox fx:id="imageComboBox" onAction="#handleComboBox" prefHeight="25.0" prefWidth="125.0" BorderPane.alignment="TOP_RIGHT" />
+   </right>
 
 </BorderPane>

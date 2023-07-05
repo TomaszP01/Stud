@@ -21,8 +21,14 @@
                 <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
                     <items>
                         <MenuItem fx:id="menuOpen" mnemonicParsing="false" onAction="#handleChooseFile" text="Select File" />
+                  <MenuItem fx:id="CloseButton" mnemonicParsing="false" onAction="#handleCloseButton" text="Close" />
                     </items>
                 </Menu>
+            <Menu mnemonicParsing="false" text="Video">
+              <items>
+                <MenuItem fx:id="resetSpeedButton" mnemonicParsing="false" onAction="#handleResetSpeed" text="Reset speed" />
+              </items>
+            </Menu>
             </menus>
         </MenuBar>
     </top>
@@ -31,9 +37,11 @@
             <children>
                 <HBox alignment="CENTER" spacing="10.0">
                     <children>
+                  <Button fx:id="SlowerButton" mnemonicParsing="false" onAction="#handleSlowerButton" text="Slower" />
                         <Button fx:id="pauseButton" alignment="CENTER" mnemonicParsing="false" onAction="#handlePauseMedia" text="PAUSE" textAlignment="CENTER" />
                         <Button fx:id="playButton" mnemonicParsing="false" onAction="#handlePlayMedia" text="PLAY" />
                         <Button fx:id="resetButton" mnemonicParsing="false" onAction="#handleResetMedia" text="RESET" />
+                  <Button fx:id="fasterButton" mnemonicParsing="false" onAction="#handleFasterButton" text="Faster" />
                     </children>
                 </HBox>
             </children>
