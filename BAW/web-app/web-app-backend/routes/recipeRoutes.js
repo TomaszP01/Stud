@@ -58,8 +58,6 @@ router.post("/add-recipe", authMiddleware, async (req, res) => {
     }
 });
   
-
-
 // Pobierz wszystkie przepisy (tylko tytuł i opis)
 router.get("/latest-recipes", async (req, res) => {
     try {
@@ -102,5 +100,32 @@ router.get("/recipe/:id", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Failed to fetch recipe details." });
   }
 });
+
+router.delete("/delete-recipe/:id", authMiddleware, async (req, res) => {
+  const { id } = req.params; // ID przepisu
+  const userId = req.user.id; // ID użytkownika z middleware
+
+  try {
+    // Sprawdź, czy przepis istnieje i należy do użytkownika
+    const [recipe] = await db.promise().query(
+      "SELECT * FROM recipes WHERE id = ? AND author_id = ?",
+      [id, userId]
+    );
+
+    if (recipe.length === 0) {
+      return res.status(404).json({ message: "Recipe not found or not authorized to delete." });
+    }
+
+    // Usuń powiązane dane (np. komentarze, sekcje)
+    await db.promise().query("DELETE FROM comment_sections WHERE recipe_id = ?", [id]);
+    await db.promise().query("DELETE FROM recipes WHERE id = ?", [id]);
+
+    res.status(200).json({ message: "Recipe deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting recipe:", error);
+    res.status(500).json({ message: "Failed to delete recipe.1" });
+  }
+});
+
 
 module.exports = router;

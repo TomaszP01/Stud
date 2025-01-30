@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const authMiddleware = require("../middleware/authMiddleware");
 const db = require('../config/db'); // Konfiguracja połączenia z bazą danych
 const generateToken = require('../utils/jwt'); // Import generatora tokenów
 const router = express.Router();
@@ -66,6 +67,10 @@ router.post('/login', async (req, res) => {
         console.error('Błąd podczas logowania:', error);
         res.status(500).json({ message: 'Wystąpił błąd serwera' });
     }
+});
+
+router.get("/verify-token", authMiddleware, (req, res) => {
+    res.status(200).json({ valid: true, user: req.user });
 });
 
 module.exports = router;

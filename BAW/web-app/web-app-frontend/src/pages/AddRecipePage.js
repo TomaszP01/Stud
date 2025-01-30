@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./AddRecipePage.css"; // Plik CSS dla stylizacji
 
 const AddRecipePage = () => {
   const [title, setTitle] = useState("");
@@ -31,26 +32,52 @@ const AddRecipePage = () => {
   };
 
   return (
-    <div>
-      <h2>Add Recipe</h2>
-      <label>
-        Title:
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-      </label>
-      <label>
-        Description:
-        <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-      </label>
-      <label>
-        Ingredients:
-        <textarea value={ingredients} onChange={(e) => setIngredients(e.target.value)} />
-      </label>
-      <label>
-        Steps:
-        <textarea value={steps} onChange={(e) => setSteps(e.target.value)} />
-      </label>
-      <button onClick={handleAddRecipe}>Add</button>
-      <button onClick={() => navigate(-1)}>Cancel</button>
+    <div className="add-recipe-container">
+      <h2 className="page-title">Add Recipe</h2>
+      <form className="add-recipe-form">
+        <label>
+          Title:
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="input-field"
+          />
+        </label>
+        <label>
+          Description:
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="input-field"
+          />
+        </label>
+        <label>
+          Ingredients:
+          <textarea
+            value={ingredients}
+            onChange={(e) => setIngredients(e.target.value)}
+            className="textarea-field"
+          />
+        </label>
+        <label>
+          Steps:
+          <textarea
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)}
+            className="textarea-field"
+          />
+        </label>
+        <div className="button-group">
+          <button type="button" onClick={handleAddRecipe} className="btn-primary">
+            Add
+          </button>
+          <button type="button" onClick={() => navigate(-1)} className="btn-secondary">
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

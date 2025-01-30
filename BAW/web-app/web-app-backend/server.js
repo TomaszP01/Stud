@@ -17,14 +17,16 @@ app.use(
       allowedHeaders: ["Content-Type", "Authorization"], // Zezwól na Authorization
     })
 );
-
+// app.use((req, res, next) => {
+//   console.log(`Otrzymano żądanie: ${req.method} ${req.originalUrl}`);
+//   next();
+// });
 const recipeRoutes = require("./routes/recipeRoutes");
 const commentRoutes = require("./routes/commentRoutes"); // Dodano
+const authRoutes = require("./routes/authRoutes");
 
 app.use("/api/recipes", recipeRoutes);
-app.use("/api/comments", commentRoutes); // Dodano
-
-const authRoutes = require("./routes/authRoutes");
+app.use("/api/comments", commentRoutes);
 app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

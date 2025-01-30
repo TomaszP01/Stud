@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./HomePage.css"; // Dodaj plik CSS
 
-const HomePage = () => {
+const HomePage = ({ isAuthenticated }) => {
   const [recipes, setRecipes] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
-  const isAuthenticated = !!localStorage.getItem("token");
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("Token in localStorage:", localStorage.getItem("token"));
     const fetchRecipes = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/recipes/latest-recipes`);
@@ -23,41 +24,40 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Welcome to the Recipe Sharing Platform</h1>
+    <div className="homepage-container">
+      <h1 className="homepage-title">Welcome to the Recipe Sharing Platform</h1>
 
       {isAuthenticated ? (
-        <>
+        <div className="auth-section">
           <p>You are logged in! Enjoy exploring recipes.</p>
-          <button onClick={() => navigate("/profile")}>My Profile</button>
-          <button onClick={() => navigate("/add-recipe")}>Add Recipe</button>
-        </>
+          <button className="btn-primary" onClick={() => navigate("/profile")}>My Profile</button>
+          <button className="btn-primary" onClick={() => navigate("/add-recipe")}>Add Recipe</button>
+        </div>
       ) : (
-        <p>Explore recipes, login or register to get started!</p>
+        <p className="info-text">Explore recipes, login or register to get started!</p>
       )}
 
-      <div>
-        {!isAuthenticated && (
-          <>
-            <Link to="/login">
-              <button>Login</button>
-            </Link>
-            <Link to="/register">
-              <button>Register</button>
-            </Link>
-          </>
-        )}
-      </div>
+      {!isAuthenticated && (
+        <div className="auth-buttons">
+          <Link to="/login">
+            <button className="btn-secondary">Login</button>
+          </Link>
+          <Link to="/register">
+            <button className="btn-secondary">Register</button>
+          </Link>
+        </div>
+      )}
 
-      <h2>Latest Recipes</h2>
-      {errorMessage && <p>{errorMessage}</p>}
-      <ul>
-      {recipes.map((recipe) => (
-        <li key={recipe.id}>
-          <h3>{recipe.title}</h3>
-          <p>{recipe.description}</p>
-          <Link to={`/recipe/${recipe.id}`}>View Details</Link> {/* Link do szczegółów */}
-        </li>
+      <h2 className="section-title">Latest Recipes</h2>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+      <ul className="recipe-list">
+        {recipes.map((recipe) => (
+          <li key={recipe.id} className="recipe-card">
+            <h3 className="recipe-title">{recipe.title}</h3>
+            <p className="recipe-description">{recipe.description}</p>
+            <Link to={`/recipe/${recipe.id}`} className="view-details-link">View Details</Link>
+          </li>
         ))}
       </ul>
     </div>

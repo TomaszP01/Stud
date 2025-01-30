@@ -6,7 +6,7 @@ const generateToken = (user) => {
         throw new Error("User data is missing or incomplete");
     }
 
-    // Payload tokena (dane, które chcesz przechowywać)
+    // Payload tokena
     const payload = {
         id: user.id,
         email: user.email,

@@ -1,0 +1,52 @@
+.register-page-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .register-form-container {
+    margin-bottom: 20px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+  }
+  
+  .btn-primary {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .btn-secondary {
+    background-color: #008cba;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    opacity: 0.9;
+  }
+  
