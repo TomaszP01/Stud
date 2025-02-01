@@ -9,7 +9,6 @@ const HomePage = ({ isAuthenticated }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("Token in localStorage:", localStorage.getItem("token"));
     const fetchRecipes = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/recipes/latest-recipes`);
